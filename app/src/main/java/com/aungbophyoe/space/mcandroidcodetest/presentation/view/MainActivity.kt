@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity(),BeersLoadStateAdapter.RetryOnClickOnLis
         binding!!.apply {
             rlTryAgain.setOnClickListener {
                 if(isNetworkAvailable(this@MainActivity)){
-                    beerPagingAdapter.retry()
+                    if(beerPagingAdapter.itemCount==0){
+                        observeData()
+                    }else{
+                        beerPagingAdapter.retry()
+                    }
                     rlTryAgain.showOrGone(false)
                 }
             }
