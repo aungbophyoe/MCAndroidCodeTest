@@ -82,6 +82,10 @@ dependencies {
     //chuck
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+    // debugImplementation because LeakCanary should only run in debug builds.
+    // to detect and fix memory leaks.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }
 
 kapt {
