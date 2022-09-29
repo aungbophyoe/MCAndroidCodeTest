@@ -7,10 +7,9 @@ import com.aungbophyoe.space.mcandroidcodetest.domain.model.Beer
 import com.aungbophyoe.space.mcandroidcodetest.utility.Constants
 import com.aungbophyoe.space.mcandroidcodetest.utility.mapper.NetworkMapper
 import retrofit2.HttpException
-import javax.inject.Inject
 
 
-class BeersPagingSource @Inject constructor(
+class BeersPagingSource constructor(
     private val apiService: ApiService,
     private val networkMapper: NetworkMapper
 ) : PagingSource<Int, Beer>() {
@@ -33,7 +32,7 @@ class BeersPagingSource @Inject constructor(
             return LoadResult.Page(
                 data = data,
                 prevKey = if(nextPageNumber == 1) null else -1,
-                nextKey = nextPageNumber.plus(1)
+                nextKey = if(nextPageNumber < 18) nextPageNumber.plus(1) else null// response.nextKey or total page no from response
             )
         } catch (e: Exception) {
             // IOException for network failures.
