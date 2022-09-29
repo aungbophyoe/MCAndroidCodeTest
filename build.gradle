@@ -1,0 +1,29 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    //Specifies whether the plugin should be applied to the current project. Otherwise it is only put on the project's classpath.
+    //This is useful when reusing classes from a plugin or to apply a plugin to sub-projects:
+    //apply - whether to apply the plugin to the current project or not. Defaults to true
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id("com.google.dagger.hilt.android") version "2.44" apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def credentialDataProperties = credentialData()
+
+def credentialData(){
+    def secretPropertiesFile = rootProject.file("secrets.properties")
+    Properties secretProperties = new Properties()
+    if (secretPropertiesFile.exists()) {
+        secretProperties.load(new FileInputStream(secretPropertiesFile))
+    }
+    return secretProperties
+}
+
+ext {
+    productionUrl = credentialDataProperties.getProperty('PRODUCTION_URL')
+}

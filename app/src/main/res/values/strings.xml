@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MCAndroidCodeTest</string>
+    <string name="no_internet_connection_please_try_again">No Internet Connection, please try again!</string>
+    <string name="beers">Beers</string>
+</resources>
